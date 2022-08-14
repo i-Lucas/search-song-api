@@ -47,6 +47,9 @@ async function byId(id: string, increment: string = "increment | not_increment",
     //@ts-ignore
     let saved = await musics.checkSavedMusic(user, music.mus[0].id) ? true : false;
 
+    //@ts-ignore
+    await musics.updateOrSaveBands(music.art.name);
+
     return {
         //@ts-ignore
         id: music.mus[0].id,
