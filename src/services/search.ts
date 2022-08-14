@@ -87,5 +87,25 @@ async function mySongs(userId: number) {
     return Promise.all(musics_saved);
 };
 
-const searchService = { music, byId, rank, save, mySongs };
+async function advanced(artist: string, music: string) {
+
+    let result = [];
+    const link = `https://api.vagalume.com.br/search.php?art=${artist}&mus=${music}&apikey=${key}`;
+
+    await axios.get(link).then(response => result = response.data)
+        .catch(error => errors.InternalServerError(error));
+
+    return result;
+};
+
+async function rankBands(band: string) {
+
+    await musics.updateOrSaveBands(band);
+};
+
+async function getRankBands() {
+    return await musics.getRankBands();
+};
+
+const searchService = { music, byId, rank, save, mySongs, advanced, rankBands, getRankBands };
 export default searchService;

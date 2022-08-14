@@ -47,12 +47,37 @@ async function mySongs(req: Request, res: Response) {
     return res.send(result);
 };
 
+async function advancedSearch(req: Request, res: Response) {
+
+    const { artist, music } = req.body;
+    if (artist == null || music == null) return errors.BadRequest('Invalid parameters');
+    const result = await search.advanced(artist, music);
+    return res.send(result);
+};
+
+async function rankBands(req: Request, res: Response) {
+
+    const { band } = req.body;
+    if (band == null) return errors.BadRequest('Invalid parameters');
+    await search.rankBands(band);
+    res.sendStatus(200);
+};
+
+async function getRankBands(req: Request, res: Response) {
+
+    const result = await search.getRankBands();
+    return res.send(result);
+};
+
 const researches = {
     searchByName,
     SearchById,
     rankMusics,
     saveMusic,
-    mySongs
+    mySongs,
+    advancedSearch,
+    rankBands,
+    getRankBands
 };
 
 export default researches;

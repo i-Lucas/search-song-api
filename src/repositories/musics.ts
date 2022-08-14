@@ -7,7 +7,7 @@ async function updateOrSave(identifier: string) {
         update: { visits: { increment: 1 } },
         create: {
             identifier,
-            visits: 0
+            visits: 1
         }
     });
 };
@@ -34,13 +34,31 @@ async function getRank() {
     return await prisma.musics.findMany({ orderBy: { visits: "desc" } });
 };
 
+async function updateOrSaveBands(name: string) {
+
+    await prisma.bands.upsert({
+        where: { name },
+        update: { visits: { increment: 1 } },
+        create: {
+            name,
+            visits: 1
+        }
+    });
+};
+
+async function getRankBands() {
+    return await prisma.bands.findMany({ orderBy: { visits: "desc" } });
+};
+
 const musics = {
 
     updateOrSave,
     saveUserMusic,
     checkSavedMusic,
     getRank,
-    getAllSaved
+    getAllSaved,
+    updateOrSaveBands,
+    getRankBands
 };
 
 export default musics;

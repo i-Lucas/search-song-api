@@ -29,3 +29,9 @@ model musics {
     identifier String @unique
     visits     Int
 }
+
+model bands {
+    id     Int    @id @default(autoincrement())
+    name   String @unique
+    visits Int
+}
