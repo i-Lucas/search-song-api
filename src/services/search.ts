@@ -42,13 +42,14 @@ async function byId(id: string, increment: string = "increment | not_increment",
     //@ts-ignore
     let picture = "https://www.vagalume.com.br" + search_picture.artist.pic_medium;
 
-    if (increment === "increment") { await musics.updateOrSave(id) };
+    if (increment === "increment") {
+        await musics.updateOrSave(id);
+        //@ts-ignore
+        await musics.updateOrSaveBands(music.art.name);
+    };
 
     //@ts-ignore
     let saved = await musics.checkSavedMusic(user, music.mus[0].id) ? true : false;
-
-    //@ts-ignore
-    await musics.updateOrSaveBands(music.art.name);
 
     return {
         //@ts-ignore
