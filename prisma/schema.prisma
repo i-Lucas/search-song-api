@@ -35,3 +35,8 @@ model bands {
     name   String @unique
     visits Int
 }
+
+model site {
+    id     Int @id @default(autoincrement())
+    visits Int
+}
